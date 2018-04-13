@@ -1,0 +1,82 @@
+<p>
+  twoway-databinding works!
+</p>
+<p>Interpolation concept</p>
+<p>My Hero is {{currentHero.name}}</p>
+<p>Simple event binding (event)="statement".</p>
+<button (click)="clickMe($event)">Click me </button>
+<p>Binding syntax: An overview</p>
+
+<h3>One-way from data source to view target : [Interpolation,Property,Attribute,Class,Style]</h3>
+<p>Example 1 : SImple interpolation</p>
+<p>{{ firstName }} {{ lastName }}</p>
+<p>Example 2 : Property Binding [property] ='expression'</p>
+<div style="border:1px solid black">  
+	<span [innerHTML]='name'></span>                  
+</div> 
+<p>Example 3: Attribute Binding </p>
+<table border="1">  
+    <thead>  
+        <tr>  
+            <th [attr.colspan]="num">Student Details</th>  
+        </tr>  
+    </thead>  
+    <tbody>  
+        <tr>  
+            <td>First Name</td>  
+            <td>{{firstName}}</td>  
+        </tr>  
+        <tr>  
+            <td>Last Name</td>  
+            <td>{{lastName}}</td>  
+        </tr>  
+    </tbody>  
+</table> 
+<p>Example 4: Class Binding</p>
+<p [class.txtcolor]= condition>txtright Class bindig</p>
+<p>Example 5 : Style Binding</p>
+<div [style.font-size.px]= fontsize>Font Style Binding</div>  
+<h3>One-way from view target to data source : [Event]</h3> 
+<button (click)='onClick("Khushboo")' >Click me</button>
+<h3>Two-way [(target)]="expression" bindon-target="expression"</h3>
+<p>Example 1 : using ngModel</p>
+<!--to use ngModel import import { FormsModule } from '@angular/forms'; in app.module.ts -->
+<input type="text" [(ngModel)]="myModel"/>
+    {{myModel}}
+ <br />
+<input (input)="username = $event.target.value">
+<p>Without ngModel two way data binding :  {{username}}!</p>
+
+<input [ngModel]="username" (ngModelChange)="username1 = $event">
+
+<p>Hello {{username1}}!</p>
+<p>Creating custom two-way data bindings</p>
+<!-- <app-custom-twoway-databinding [counter]="10"></app-custom-twoway-databinding> -->
+<app-custom-twoway-databinding [(counter)]="counterValue"></app-custom-twoway-databinding>
+<p *ngIf="counterValue"> two way using custome compo{{counterValue}}</p>
+<div *ngFor="let hero of heroes; trackBy:hero?.key">{{hero.name}} {{hero.key}}</div>
+
+<div [ngSwitch]="tab">
+      <div *ngSwitchCase="1">Tab content 1</div>
+      <div *ngSwitchCase="2">Tab content 2</div>
+      <div *ngSwitchCase="3"></div>
+      <div *ngSwitchDefault>Select a tab</div>
+    </div> 
+<!-- 
+for binding ref
+<div [ngSwitch]="counterValue">
+      <div *ngSwitchCase="1">Tab content 1</div>
+      <div *ngSwitchCase="2">Tab content 2</div>
+      <div *ngSwitchCase="3"></div>
+      <div *ngSwitchDefault>Select a tab</div>
+    </div> -->
+  <p>Template reference variables ( #var )</p>
+  <input #phone placeholder="phone number">
+  <button (click)="callPhone(phone.value)">Call</button>
+  <p>Template reference variable warning notes(ref-)</p>
+  <input ref-fax placeholder="fax number">
+<button (click)="callFax(fax.value)">Fax</button>
+<p>The pipe operator ( | )</p>
+<div>Title through uppercase pipe: {{title2 | uppercase}}</div>
+<p>The safe navigation operator ( ?. ) and null property paths</p>
+The current hero's name is {{currentHero?.name1}}
